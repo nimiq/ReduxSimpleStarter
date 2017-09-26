@@ -13,24 +13,24 @@ class SearchBar extends Component {
         // In the contructore we define the initial state.
         // This is th eonly place where we set the state directly: everywhere
         // else we set the state using: this.setState()
-        this.state = { term: ''  };
+        this.state = {term: ''};
     }
 
     render() {
         return (
-            <div>
+            <div className="search-bar">
                 <input
                     value={this.state.term}
-                    onChange={event => this.setState({term: event.target.value})} />
+                    onChange={event => this.onInputChange(event.target.value)} />
                 {/* <p>The value is: {this.state.term}</p> */}
             </div>
         );
     }
 
-    // Method in a classic way.
-    // onInputChange(event) {
-    //     console.log(event.target.value);
-    // }
+    onInputChange(term) {
+        this.setState({term});
+        this.props.onSearchTermChange(term);
+    }
 };
 
 export default SearchBar;

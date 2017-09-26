@@ -1,0 +1,80 @@
+
+1. IMPORTS AND CURLY BRACES
+===========================
+import React, { Component } from 'react';  // {} is to import an inner component from that module (not the one exported as default).
+
+
+2. JSX AND ES6 SYNTACTIC SUGAR
+==============================
+- Props
+    const VideoDetail = ({video, name}}) => {  // Syntactic sugar for: const video = props.video; const name = props.name;
+    };
+- Object
+    { videos };  // Syntactic sugar for: { videos: videos };
+- String template
+    `https://www.youtube.com/embed/${videoId}`  // Syntactic sugar for: "https://www.youtube.com/embed/" + videoId;
+
+
+3. DATA, STATES, PROPS: DOWNWARDS DATA FLOW
+===========================================
+PRINCIPLES:
+    A. Each component can have each own state.
+    A. For states shared between components, the most PARENT component:
+        - keeps the shared state
+        - fetches the data (via APi f.i.) and set the initial state
+        - new data available triggers state change (which triggers a re-render)
+    B. STATES are passed down to components using PROPS.
+    C. If a child needs to be able to change the state, a callback function is passed down to the child's props.
+       But better not to go more than 2 levels deep.
+       Example:
+            <VideoList
+                onVideoSelect={selectedVideo => this.setState({selectedVideo})}
+                videos={this.state.videos} />
+
+
+4. STATES
+=========
+- Only class-based components can have states.
+- The initial state is defined in the constructor:
+    constructor(props) {
+        super(props);
+        // State initialized here in the constructor.
+        this.state = { videos: [] };
+- NEVER update the state directly but call:
+    this.setState({ videos });
+That's because a state change must trigger a re-render.
+- SETTING the STATE triggers the re-RENDER of the components (and of all child-components).
+
+
+5. COMPONENTS
+=============
+- As function:
+const App = (props) => {
+    // No state management in function components.
+    return (
+        <VideoList videos={props.videos} />
+    );
+}
+- As class:
+class App extends Component {
+    constructor(props) {
+        super(props);
+        // State initialized here in the constructor.
+        this.state = { videos: [] };
+
+        YTSearch({key: API_KEY, term: 'snowboard'}, videos => {
+            // Update the state.
+            this.setState({ videos });  // // Syntactic sugar for: { videos: videos }.
+        });
+    }
+    return (
+        <VideoList videos={this.state.videos} />
+    );
+}
+
+
+6.  REQUIREMENTS
+================
+- Install new requirements:
+npm install --save loadash
+This will add it to package.json
