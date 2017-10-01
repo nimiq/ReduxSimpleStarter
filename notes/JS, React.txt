@@ -1,0 +1,116 @@
+
+1. IMPORTS AND CURLY BRACES
+===========================
+{} is to import a single property rather than the entire module (the one exported as default).
+Example:
+    import React, { Component } from 'react';
+
+
+2. JSX AND ES6 SYNTACTIC SUGAR
+==============================
+- Function args (Props)
+    function foo({name, age}) {...}
+    > Syntactic sugar for:
+        function foo(person) {
+            const name = person.name;
+            const age = person.age;
+            ...
+        }
+- Object
+    {videos};  // Syntactic sugar for: {videos: videos};
+    const {name, age} = person;
+    > Syntactic sugar for:
+        const name = person.name;
+        const age = person.age;
+- String template
+    `https://www.youtube.com/embed/${videoId}`  // Syntactic sugar for: "https://www.youtube.com/embed/" + videoId;
+- Destructuring (often using when creating a new state - REMEMBER: never mutate the state)
+    [car1, car2, ...cars]  // Returns a new array concatenating car1, car2 and the array cars
+- Fat arrow functions
+Single line (IMPLICIT return):
+    ['red', 'blue'].map(color => color.toUpperCase());  // ["RED", "BLUE"]
+Multiple lines (EXPLICIT return):
+    ['red', 'blue'].map(color => {
+       return color.toUpperCase()
+    });  // ["RED", "BLUE"]
+
+
+3. DATA, STATES, PROPS: DOWNWARDS DATA FLOW
+===========================================
+PRINCIPLES:
+    A. Each component can have its own state.
+    A. For states shared between components, the most PARENT component:
+        - keeps the shared state
+        - fetches the data (via API f.i.) and set the initial state
+        - new data available triggers state change (which triggers a re-render)
+    B. STATES are passed down to components using PROPS.
+    C. If a child needs to be able to change the state, a callback function is passed down to the child's props.
+       But better not to go more than 2 levels deep.
+       Example:
+            <VideoList
+                onVideoSelect={selectedVideo => this.setState({selectedVideo})}
+                videos={this.state.videos} />
+
+
+4. STATES
+=========
+- Only class-based components can have states.
+- The initial state is defined in the constructor:
+    constructor(props) {
+        super(props);
+        // State initialized here in the constructor.
+        this.state = { videos: [] };
+- NEVER update the state directly but call:
+    this.setState({ videos });
+That's because a state change must trigger a re-render.
+- SETTING the STATE triggers the re-RENDER of the components (and of all child-components).
+
+
+5. REFS
+=======
+In a component, if you need to refer to an HTML object created in your render(), then use a ref (same concept as the id).
+Useful to integrate 3rd party libraries (which do not know anything about React).
+Example:
+    class GoogleMap extends Component {
+        componentDidMount() {
+            new google.maps.Map(this.refs.map, {...})  // Use the ref.
+        }
+
+        render (
+            return <div ref="map" />  // Create a reference available as: this.refs.map (do not use ID).
+        )
+    }
+
+
+6. COMPONENTS
+=============
+- As function:
+const App = (props) => {
+    // No state management in function components.
+    return (
+        <VideoList videos={props.videos} />
+    );
+}
+- As class:
+class App extends Component {
+    constructor(props) {
+        super(props);
+        // State initialized here in the constructor.
+        this.state = { videos: [] };
+
+        YTSearch({key: API_KEY, term: 'snowboard'}, videos => {
+            // Update the state.
+            this.setState({ videos });  // // Syntactic sugar for: { videos: videos }.
+        });
+    }
+    return (
+        <VideoList videos={this.state.videos} />
+    );
+}
+
+
+7. REQUIREMENTS
+===============
+- Install new requirements:
+npm install --save loadash
+This will add it to package.json

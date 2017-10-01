@@ -1,0 +1,23 @@
+REACT
+REACT-DOM
+REACT-ROUTE
+REDUX
+REACT-REDUX
+===========
+Libraries for React and Redux
+
+LODASH
+======
+Multi-purpose JS library (like a lighter jQuery):
+ - math ops (like sum of an array or round)
+ - throttling a function (debounce) (eg. instance search that happens on every key press, but non more freq than 500 ms)
+
+AXIOS
+REDUX-PROMISE
+=============
+AXIOS makes AJAX calls (XHR)
+REDUX-PROMISE is a middleware that turn promises into responses in actions payload.
+
+REACT-SPARKLINES
+================
+Create charts, especially small and simple charts (not the full screen very detailed charts)
