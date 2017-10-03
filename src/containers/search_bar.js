@@ -7,18 +7,12 @@ class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {term: ''};
-
-        // This is the alternative way to bind to an event.
-        // The traditional (better) way would be a fat arrow func (in the input element):
-        // onChange={(e) => this.onInputChange(e)}
-        this.onInputChange = this.onInputChange.bind(this);
-        // this.onFormSubmit = this.onFormSubmit.bind(this); // In this case we use the fat arrow in the JSX.
     }
 
     onInputChange(event) {
         // In order to make `this` work here you need either to:
-        //  - bind the function in the constructor
-        //  - use a fat arrow in the onEvent HTML property (BETTER)
+        //  - use .bind(this) in the onChange HTML property
+        //  - use a fat arrow in the onChange HTML property
         this.setState({term: event.target.value});
     }
 
@@ -35,7 +29,7 @@ class SearchBar extends Component {
                     placeholder="City..."
                     className="form-control"
                     value={this.state.term}
-                    onChange={this.onInputChange}  // It would be better to use a fat arrow func (see above).
+                    onChange={this.onInputChange.bind(this)}  // And alternative way to bind(this) would be using a fat arrow func.
                 />
                 <span className="input-group-btn">
                     <button type="submit" className="btn -btn-secondary">Submit</button>
