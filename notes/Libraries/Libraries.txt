@@ -9,7 +9,7 @@ Libraries for React and Redux
 
 LODASH
 ======
-Multi-purpose JS library (like a lighter jQuery):
+Multi-purpose JS library (like a lighter jQuery).
 See: Lodash.js
 
 AXIOS

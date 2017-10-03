@@ -4,10 +4,15 @@ import {fetchPosts} from '../actions';
 import {Link} from 'react-router-dom';
 
 class PostsIndex extends Component {
-    // Lifecycle React function called when the component renders.
-    // NOTE: we want the component to render first and then make the network
-    // call to the api.
-    // NOTE: componentWillMount() is executed before the componet is renedered.
+    /* Lifecycle React function called when the component renders.
+       NOTE: we want the component to render first and then make the network
+       call to the api.
+       NOTE: componentWillMount() is executed before the componet is renedered.
+
+       Another way of doing data fetching for a component is using the onEnter
+       event on the Route. This leads to more reusable components.
+       See: https://www.udemy.com/react-redux/learn/v4/t/lecture/5691848?start=0
+     */
     componentDidMount() {
         this.props.fetchPosts();
     }

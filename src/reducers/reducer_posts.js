@@ -11,6 +11,11 @@ export default function(state={}, action) {
             return _.mapKeys(action.payload.data, 'id');
         case FETCH_POST:
             const post = action.payload.data;
+            /* We decided to return the entire set of posts, including the selected
+               one. A better approach (more efficient) would be to use a selector
+               (library: reselect) to compute a derived (filtered in this case) state.
+               Checkout a video: https://www.udemy.com/react-redux/learn/v4/t/lecture/5691842?start=0
+             */
             return {...state, [post.id]: post};  /* Key interpolation: create a new array copy of state,
                                                     but replacing the key 'post.id' with the new given obj 'post'.
                                                   */

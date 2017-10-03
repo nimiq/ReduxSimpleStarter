@@ -28,7 +28,12 @@ Note: if you import from index.js, you don't have to specify the file name.
        const {john: {name, age}} = people;
        name === 'john';  // true
        age === 50;  // true
-    D. KEY INTERPOLATION:
+    D. SPREAD
+       const john = {name: 'john', age: 20};
+       ...john  // Spreads the single attributes of the object.
+       For instance:
+       {...john}  // creates a new obj which is an exact copy of john.
+    E. KEY INTERPOLATION:
        const people = {john: {name: 'john', age: 50}, jane: {name: 'jane', age: 30}}
        {...people, ['john']: {name: 'JOHN', age: 10}}  // create a new obj replacing the key 'john' with the new given obj.
 - String template
