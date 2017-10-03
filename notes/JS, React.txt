@@ -4,11 +4,12 @@
 {} is to import a single property rather than the entire module (the one exported as default).
 Example:
     import React, { Component } from 'react';
+Note: if you import from index.js, you don't have to specify the file name.
 
 
 2. JSX AND ES6 SYNTACTIC SUGAR
 ==============================
-- Function args (Props)
+- DESTRUCTURING Function args (Props):
     function foo({name, age}) {...}
     > Syntactic sugar for:
         function foo(person) {
@@ -17,11 +18,19 @@ Example:
             ...
         }
 - Object
-    {videos};  // Syntactic sugar for: {videos: videos};
-    const {name, age} = person;
-    > Syntactic sugar for:
-        const name = person.name;
-        const age = person.age;
+    A. DESTRUCTURING:
+       {videos};  // Syntactic sugar for: {videos: videos};
+    B. const {name, age} = person;
+       > Syntactic sugar for:
+           const name = person.name;
+           const age = person.age;
+    C. const people = {john: {name: 'john', age: 50}, jane: {name: 'jane', age: 30}}
+       const {john: {name, age}} = people;
+       name === 'john';  // true
+       age === 50;  // true
+    D. KEY INTERPOLATION:
+       const people = {john: {name: 'john', age: 50}, jane: {name: 'jane', age: 30}}
+       {...people, ['john']: {name: 'JOHN', age: 10}}  // create a new obj replacing the key 'john' with the new given obj.
 - String template
     `https://www.youtube.com/embed/${videoId}`  // Syntactic sugar for: "https://www.youtube.com/embed/" + videoId;
 - Destructuring (often using when creating a new state - REMEMBER: never mutate the state)
