@@ -8,17 +8,21 @@ import {createPost} from '../actions';
 /*
 NOTE: bare in mind that Redux Form takes care of the:
  - state
- - valiodation
+ - validation
 of the form. The actual submit/post of the data is up to us.
 */
 class PostsNew extends Component {
     renderField(field) {
+        /* Syntactic sugar for:
+               const touched = field.meta.touched;
+               const error = field.meta.error;
+        */
         const {meta: {touched, error}} = field;
         const className = `form-group ${touched && error ? 'has-danger' : ''}`;
 
         return (
             <div className={className}>
-                <label>{field.label}</label>
+                <label>{field.label}</label>  {/* Custom attribute in Field */}
                 <input
                     className="form-control"
                     type="text"
