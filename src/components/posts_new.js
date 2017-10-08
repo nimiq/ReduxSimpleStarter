@@ -109,5 +109,6 @@ export default reduxForm({
     form: 'PostsNewFormFoo123',  // ID of the form, must be unique per app (codebase).
     validate: validate,
 })(
+    // connect() here is necessary to add the mapDispatchToProps(), otherwise it could be skipped.
     connect(null, {createPost})(PostsNew)
 );
