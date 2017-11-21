@@ -55,8 +55,9 @@ const books = [
   {id: 1, title: 'Gomorra'},
   {id: 2, title: 'Harry Potter'},
 ]
-_.each(books, ({id, title}) => console.log(id));  /* 1
+_.forEach(books, ({id, title}) => console.log(id));  /* 1
                                                      2 */
+// Note: to simulate a break statement in forEach(): return false;
 
 // FILTER
 const books = [

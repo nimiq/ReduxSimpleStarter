@@ -58,13 +58,13 @@ class PostsNew extends Component {
                                                                           to use 'this' in the callback func */}
                 <Field
                     name="title"  // The piece of state handled by this Field.
-                    component={this.renderField}  // The actual visual component in JSX.
+                    component={this.renderField}  // DO NOT bind() or you will get a weird focus error!!
                     // Custom attributes that end up in the renderField(field) as field.label:
                     label="Title"
                 />
                 <Field
                     name="categories"
-                    component={this.renderField}
+                    component={this.renderField}  // DO NOT bind() or you will get a weird focus error!!
                     // Custom attributes that end up in the renderField(field) as field.label:
                     label="Categories"
                 />
